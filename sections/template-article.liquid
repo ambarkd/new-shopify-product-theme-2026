@@ -1,2 +1,14 @@
-<h1>{{ article.title }}</h1>
-<small>{{ article.author }}</small>
+<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+  {{ article.published_at | date: '%Y-%m-%d' }}
+</time>
+
+{% if article.image %}
+  <img
+    src="{{ article.image | image_url: 'large' }}"
+    alt="{{ article.image.alt | escape }}"
+  >
+{% endif %}
+
+<div class="">
+  {{ article.content }}
+</div>

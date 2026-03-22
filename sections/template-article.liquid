@@ -5,7 +5,7 @@
 
   {% if article.image %}
     <img
-      src="{{ article.image | image_url }}"
+      src="{{ article.image | image_url: quality: 60 }}"
       alt="{{ article.image.alt | escape }}"
       width=""
       height=""

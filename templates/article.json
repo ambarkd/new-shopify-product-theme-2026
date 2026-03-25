@@ -35,9 +35,9 @@
       },
       "block_order": [
         "title",
-        "thumbnail",
         "published_date",
         "author",
+        "thumbnail",
         "content"
       ],
       "settings": {
@@ -46,7 +46,5 @@
       }
     }
   },
-  "order": [
-    "template"
-  ]
+  "order": ["template"]
 }

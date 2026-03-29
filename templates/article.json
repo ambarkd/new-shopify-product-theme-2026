@@ -16,16 +16,16 @@
           "type": "article_title",
           "settings": {}
         },
-        "thumbnail": {
-          "type": "featured_image",
-          "settings": {}
-        },
         "published_date": {
           "type": "article_published_date",
           "settings": {}
         },
         "author": {
           "type": "article_author",
+          "settings": {}
+        },
+        "thumbnail": {
+          "type": "featured_image",
           "settings": {}
         },
         "content": {
@@ -42,9 +42,12 @@
       ],
       "settings": {
         "enable_author": true,
-        "enable_published_date": true
+        "enable_published_date": true,
+        "author_prefix": "Author:"
       }
     }
   },
-  "order": ["template"]
+  "order": [
+    "template"
+  ]
 }

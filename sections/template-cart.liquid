@@ -82,12 +82,44 @@
           </tbody>
         </table>
 
-        <div class="flex flex-col md:flex-row items-center justify-center">
-          <div class="w-full my-4"></div>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+          <!-- Notes -->
+          <div class="w-full my-4">
+            <div class="flex flex-col items-center">
+              <label for="cart_notes" class="my-2 text-sm font-medium text-gray-700"> Cart Notes </label>
+              <textarea
+                name="note"
+                id="cart_notes"
+                class="w-full border border-gray-300 rounded-md h-24 p-3 focus:outline-none focus:ring-2 focus:ring-black"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Summary -->
           <div class="w-full my-4 md:w-80">
-            <h3 class="text-xl">Subtotal: {{ cart.total_price | money }}</h3>
-            <div class="my-2"></div>
-            <div class="my-2"></div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Subtotal: {{ cart.total_price | money }}</h3>
+
+            <!-- Update Button -->
+            <div class="my-2">
+              <button
+                type="submit"
+                name="update"
+                class="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-300 transition duration-200"
+              >
+                Update
+              </button>
+            </div>
+
+            <!-- Checkout Button -->
+            <div class="my-2">
+              <button
+                type="submit"
+                name="checkout"
+                class="w-full bg-black text-white px-4 py-3 rounded-md text-sm font-semibold hover:bg-gray-800 transition duration-200"
+              >
+                Checkout
+              </button>
+            </div>
           </div>
         </div>
       </form>

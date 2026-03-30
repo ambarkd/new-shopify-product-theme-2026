@@ -1,38 +1,43 @@
-{% paginate blog.articles by section.settings.number_of_blog_posts %}
-  {% for article in blog.articles %}
-    <div>
-      {% if article.image %}
-        <img src="{{ article.image |  image_url  }}" alt="{{ article.image.alt }}" width="350px" height="350px">
-      {% else %}
-        {{ 'image' | placeholder_svg_tag: 'w-50' }}
-      {% endif %}
-      <h1>{{ article.title }}</h1>
-
-      {% if section.settings.enable_excerpt %}
-        {% if article.excerpt.size > 0 %}
-          <p>{{ article.excerpt }}</p>
-        {% else %}
-          <p>{{ article.content | strip_html | truncatewords: 25 }}</p>
-        {% endif %}
-      {% endif %}
-
-      {% if section.settings.enable_author %}
-        <p>By {{ article.author }}</p>
-      {% endif %}
-
-      {% if section.settings.enable_view_more %}
-        <div class="flex items-center justify-center mt-4">
-          <a
-            href="{{ article.url }}"
-            class="bg-black text-white px-4 py-4 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200"
-          >
-            View more
-          </a>
-        </div>
-      {% endif %}
+<div class="py-8">
+  {% paginate blog.articles by section.settings.number_of_blog_posts %}
+    <div class="text-center text-3xl">
+      <h1>{{ blog.title }}</h1>
     </div>
-  {% endfor %}
-{% endpaginate %}
+    {% for article in blog.articles %}
+      <div>
+        {% if article.image %}
+          <img src="{{ article.image |  image_url  }}" alt="{{ article.image.alt }}" width="350px" height="350px">
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'w-50' }}
+        {% endif %}
+        <h1>{{ article.title }}</h1>
+
+        {% if section.settings.enable_excerpt %}
+          {% if article.excerpt.size > 0 %}
+            <p>{{ article.excerpt }}</p>
+          {% else %}
+            <p>{{ article.content | strip_html | truncatewords: 25 }}</p>
+          {% endif %}
+        {% endif %}
+
+        {% if section.settings.enable_author %}
+          <p>By {{ article.author }}</p>
+        {% endif %}
+
+        {% if section.settings.enable_view_more %}
+          <div class="flex items-center justify-center mt-4">
+            <a
+              href="{{ article.url }}"
+              class="bg-black text-white px-4 py-4 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200"
+            >
+              View more
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endpaginate %}
+</div>
 
 {% schema %}
 {

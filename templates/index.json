@@ -17,9 +17,19 @@
         "featured_collection": "all",
         "number_of_product_to_display": 4
       }
+    },
+    "featured_collection_n3VBia": {
+      "type": "featured-collection",
+      "name": "Featured Collection",
+      "settings": {
+        "title": "Featured Collection",
+        "featured_collection": "",
+        "number_of_product_to_display": 4
+      }
     }
   },
   "order": [
-    "feature-collection"
+    "feature-collection",
+    "featured_collection_n3VBia"
   ]
 }

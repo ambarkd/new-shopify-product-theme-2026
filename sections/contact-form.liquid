@@ -2,6 +2,32 @@
   {% form 'contact' %}
     <div class="w-full max-w-4xl bg-white shadow-lg rounded-2xl p-10">
       <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">{{ section.settings.form_name }}</h2>
+      {% if form.errors %}
+        <div class="border p-3 rounded-b-sm">
+          <div class="flex flex-row items-center w-full my-3">
+            <div class="text-red-500">
+              {% render 'icon-failed' %}
+            </div>
+            <div class="text-sm font-medium ml-3">Oh! Something went wrong. Please try again..</div>
+          </div>
+          <ul class="px-4 mb-3 ml-7 list-decimal">
+            {% for error in form.errors %}
+              <li>
+                <span>{{ form.errors.messages[error] }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% elsif form.posted_successfully? %}
+        <div class="border p-3 rounded-b-sm">
+          <div class="flex flex-row items-center w-full my-3">
+            <div class="text-green-500">
+              {% render 'icon-success' %}
+            </div>
+            <div class="text-sm font-medium ml-3">Comment posted successfully!</div>
+          </div>
+        </div>
+      {% endif %}
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Name -->

@@ -16,9 +16,17 @@
         "featured_collection": "all",
         "number_of_product_to_display": 4
       }
+    },
+    "contact_form_EXyBBF": {
+      "type": "contact-form",
+      "name": "Contact Form",
+      "settings": {
+        "form_name": "Contact Us Now"
+      }
     }
   },
   "order": [
-    "feature-collection"
+    "feature-collection",
+    "contact_form_EXyBBF"
   ]
 }

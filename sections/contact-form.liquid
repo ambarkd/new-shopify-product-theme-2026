@@ -1,7 +1,9 @@
 <div class="flex items-center justify-center py-12 bg-gray-50">
   {% form 'contact' %}
     <div class="w-full max-w-4xl bg-white shadow-lg rounded-2xl p-10">
-      <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">{{ section.settings.form_name }}</h2>
+      {% if section.settings.form_name != blank %}
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">{{ section.settings.form_name }}</h2>
+      {% endif %}
       {% if form.errors %}
         <div class="border p-3 rounded-b-sm">
           <div class="flex flex-row items-center w-full my-3">

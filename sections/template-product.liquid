@@ -6,6 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
+
 <style>
   .swiper-button-prev,
   .swiper-button-next {
@@ -22,22 +23,60 @@
   .swiper-pagination-bullet-active {
     opacity: 1;
   }
+
+  /* Desktop gallery */
+  .thumb-btn.active {
+    border: 2px solid black;
+  }
+
+  .thumb-btn img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
 </style>
-<div class="mx-auto max-w-6xl my-10 px-4">
+
+<div class="mx-auto max-w-6xl my-10 pb-4 pt-24">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     <!-- Media -->
     <div class="product--medias">
-      <div class="hidden md:grid grid-cols-1 gap-4">
-        {% for media in product.media %}
-          <div class="overflow-hidden rounded-2xl bg-gray-50 shadow-sm hover:shadow-md transition duration-300">
-            <div class="p-3">
+      <!-- ✅ DESKTOP -->
+      <div class="hidden md:block">
+        <!-- Main Media -->
+        <div
+          id="main-media"
+          class="rounded-2xl overflow-hidden bg-gray-50 shadow-sm mb-4"
+        >
+          <div class="p-4">
+            {% render 'product-media', media: product.media.first %}
+          </div>
+        </div>
+
+        <!-- Thumbnails BELOW -->
+        <div class="grid grid-cols-5 gap-3">
+          {% for media in product.media %}
+            <button
+              class="thumb-btn border rounded-xl overflow-hidden hover:opacity-80 transition"
+              data-index="{{ forloop.index0 }}"
+            >
+              <div class="h-20 bg-gray-50 p-1">
+                {% render 'product-media', media: media %}
+              </div>
+            </button>
+          {% endfor %}
+        </div>
+
+        <!-- Hidden FULL media -->
+        <div id="all-media" class="hidden">
+          {% for media in product.media %}
+            <div class="media-item">
               {% render 'product-media', media: media %}
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
 
-      <!-- Mobile -->
+      <!-- ✅ MOBILE (UNCHANGED) -->
       <div class="md:hidden">
         <div class="swiper h-96 rounded-2xl overflow-hidden shadow-md">
           <div class="swiper-wrapper">
@@ -127,7 +166,6 @@
                       </div>
                     {% endfor %}
 
-                    <!-- ✅ IMPORTANT: JSON only once -->
                     <script type="application/json">
                       {{ product.variants | json }}
                     </script>
@@ -182,6 +220,37 @@
     </div>
   </div>
 </div>
+
+<!-- ✅ JS -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.thumb-btn');
+    const mainMedia = document.getElementById('main-media');
+    const mediaItems = document.querySelectorAll('#all-media .media-item');
+
+    buttons.forEach((btn, index) => {
+      btn.addEventListener('click', function () {
+        // Active border
+        buttons.forEach((b) => b.classList.remove('active'));
+        this.classList.add('active');
+
+        // Load full media
+        const newMedia = mediaItems[index].innerHTML;
+
+        mainMedia.innerHTML = `
+          <div class="p-4">
+            ${newMedia}
+          </div>
+        `;
+      });
+
+      // First active
+      if (index === 0) {
+        btn.classList.add('active');
+      }
+    });
+  });
+</script>
 <script>
   class VariantSelector extends HTMLElement {
     constructor() {

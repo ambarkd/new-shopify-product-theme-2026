@@ -1,0 +1,65 @@
+<div class="container mx-auto px-4 py-8">
+  {% paginate search.results by 6 %}
+    <h1 class="text-center text-2xl font-semibold mb-6">Search Results</h1>
+
+    <!-- Search Bar -->
+    <div class="flex items-center justify-center mb-8">
+      <form
+        action="{{ routes.search_url }}"
+        method="get"
+        class="flex w-full max-w-xl shadow-md rounded-xl overflow-hidden"
+      >
+        <input
+          type="search"
+          name="q"
+          placeholder="Search products..."
+          value="{{ search.terms | escape }}"
+          class="w-full px-4 py-3 outline-none text-gray-700"
+        >
+
+        <button
+          type="submit"
+          class="bg-black text-white px-6 hover:bg-gray-800 transition"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+
+    {% if search.performed %}
+      {% if search.results.size > 0 %}
+        <div class="max-w-6xl mx-auto">
+          <p class="text-gray-500 text-center mb-6">
+            {{ search.results.size }} results for
+            <span class="font-medium text-black">"{{ search.terms | escape }}"</span>
+          </p>
+
+          <!-- Product Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {% for item in search.results %}
+              {% case item.object_type %}
+                {% when 'product' %}
+                  <div class="border rounded-xl p-4 hover:shadow-lg transition">
+                    {% render 'product-cart', product_product: item %}
+                  </div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+
+      {% else %}
+        <div class="text-center mt-10">
+          <p class="text-gray-500 text-lg">
+            No results found for
+            <span class="font-medium text-black">"{{ search.terms | escape }}"</span>
+          </p>
+          <p class="text-sm text-gray-400 mt-2">Try using different keywords.</p>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <div class="mt-10">
+      {% render 'pagination', pagination: paginate %}
+    </div>
+  {% endpaginate %}
+</div>

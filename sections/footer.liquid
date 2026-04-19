@@ -1,17 +1,17 @@
 <footer class="bg-black text-gray-300 mt-16">
   <div class="mx-auto max-w-6xl px-4 py-12">
     <!-- Grid Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
       <!-- Store Info -->
-      <div>
-        <h2 class="text-xl font-semibold text-white mb-4">
-          <a href="/">{{ shop.name }}</a>
-        </h2>
+      <div class="flex flex-col items-center md:items-start">
+        <a href="/" class="text-xl font-semibold text-white mb-4 hover:opacity-80 transition">
+          {{ shop.name }}
+        </a>
         <p class="text-sm text-gray-400">Thank you for visiting our store.</p>
       </div>
 
       <!-- Quick Links -->
-      <div>
+      <div class="flex flex-col items-center md:items-start">
         <h3 class="text-lg font-medium text-white mb-4">Quick Links</h3>
         <ul class="space-y-2">
           {% for link in linklists[section.settings.footer_menu].links %}
@@ -25,7 +25,7 @@
       </div>
 
       <!-- Contact -->
-      <div>
+      <div class="flex flex-col items-center md:items-start">
         <h3 class="text-lg font-medium text-white mb-4">Contact</h3>
 
         <div class="space-y-2 text-sm">
@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <!-- Bottom Centered Copyright -->
+    <!-- Bottom -->
     <div class="border-t border-gray-800 mt-10 pt-6 text-center text-sm text-gray-500">
       © {{ 'now' | date: '%Y' }}
       {{ shop.name }}. All rights reserved.

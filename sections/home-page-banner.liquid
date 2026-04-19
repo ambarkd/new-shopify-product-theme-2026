@@ -1,21 +1,26 @@
-<section class="bg-gradient-to-b from-black via-gray-900 to-black text-white pt-[75px]">
-  <div class="mx-auto max-w-6xl px-4 py-16">
+<section class="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-800 text-white pt-[75px] relative overflow-hidden">
+  <!-- Subtle Glow -->
+  <div
+    class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.06),transparent_40%)] pointer-events-none"
+  ></div>
+
+  <div class="mx-auto max-w-6xl px-4 py-16 relative z-10">
     <!-- Top Section -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
       <!-- Left Content -->
       <div class="text-center md:text-left">
-        <h1 class="text-3xl md:text-5xl font-bold mb-6">
+        <h1 class="text-3xl md:text-5xl font-semibold leading-tight mb-6">
           {{ section.settings.heading }}
         </h1>
 
-        <p class="text-gray-400 mb-8">
+        <p class="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0">
           {{ section.settings.subtext }}
         </p>
 
         {% if section.settings.button_text != blank %}
           <a
             href="{{ section.settings.button_link }}"
-            class="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-md transition shadow-lg shadow-green-500/20"
+            class="inline-block bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition shadow-lg"
           >
             {{ section.settings.button_text }}
           </a>
@@ -28,7 +33,7 @@
           <img
             src="{{ section.settings.image | image_url: width: 500 }}"
             alt="banner"
-            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full"
+            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border border-gray-700 shadow-xl"
           >
         {% endif %}
       </div>
@@ -37,17 +42,17 @@
     <!-- Tools Section -->
     {% if section.blocks.size > 0 %}
       <div class="mt-16 text-center md:text-left">
-        <p class="text-gray-500 mb-6">Worked with</p>
+        <p class="text-gray-500 mb-6 tracking-wide text-sm uppercase">Worked with</p>
 
-        <!-- Single Row Logos -->
-        <div class="flex gap-10 items-center justify-start md:justify-between overflow-x-auto no-scrollbar py-2">
+        <!-- Logo Row -->
+        <div class="flex gap-12 items-center justify-start md:justify-between overflow-x-auto no-scrollbar py-2">
           {% for block in section.blocks %}
             {% if block.settings.logo != blank %}
-              <div class="flex-shrink-0 opacity-80 hover:opacity-100 transition bg-white/90 p-3 rounded-md">
+              <div class="flex-shrink-0 opacity-60 hover:opacity-100 hover:scale-105 transition duration-300">
                 <img
-                  src="{{ block.settings.logo | image_url: width: 160 }}"
+                  src="{{ block.settings.logo | image_url: width: 180 }}"
                   alt="logo"
-                  class="h-8 md:h-10 object-contain"
+                  class="h-10 md:h-12 object-contain"
                 >
               </div>
             {% endif %}
@@ -57,7 +62,7 @@
     {% endif %}
   </div>
 
-  <!-- Hide scrollbar (clean look) -->
+  <!-- Hide scrollbar -->
   <style>
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -88,7 +93,7 @@
       "type": "text",
       "id": "button_text",
       "label": "Button Text",
-      "default": "Let's get started"
+      "default": "Get Started"
     },
     {
       "type": "url",

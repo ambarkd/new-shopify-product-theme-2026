@@ -114,6 +114,13 @@
             "skill_icon": "shopify://shop_images/data-analysis.png",
             "skill_name": "SEO Improvement"
           }
+        },
+        "skill_y8Y3Tc": {
+          "type": "skill",
+          "settings": {
+            "skill_icon": "shopify://shop_images/shopify.png",
+            "skill_name": "Theme Development"
+          }
         }
       },
       "block_order": [
@@ -121,7 +128,8 @@
         "skill_7RhFYe",
         "skill_GTYiKL",
         "skill_KEyAxb",
-        "skill_i7KNap"
+        "skill_i7KNap",
+        "skill_y8Y3Tc"
       ],
       "name": "About & Skills",
       "settings": {

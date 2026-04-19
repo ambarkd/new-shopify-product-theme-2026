@@ -47,6 +47,12 @@
           "settings": {
             "logo": "shopify://shop_images/atom.png"
           }
+        },
+        "logo_mFwJVE": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/bootstrap.png"
+          }
         }
       },
       "block_order": [
@@ -55,7 +61,8 @@
         "logo_W8T64z",
         "logo_dnYGwF",
         "logo_QHyY6a",
-        "logo_wX674z"
+        "logo_wX674z",
+        "logo_mFwJVE"
       ],
       "name": "Home Page Banner",
       "settings": {
@@ -73,7 +80,9 @@
     "feature-collection": {
       "type": "featured-collection",
       "settings": {
+        "label": "Showcase",
         "title": "Featured Collection",
+        "description": "A collection of custom projects created for this development store, showcasing design ideas, features, and implementation approaches.",
         "featured_collection": "ladies-tee",
         "number_of_product_to_display": 4
       }
@@ -82,7 +91,8 @@
       "type": "contact-form",
       "name": "Contact Form",
       "settings": {
-        "form_name": "Contact Us Now"
+        "form_name": "Contact Us Now",
+        "description": "I am currently exploring new job opportunities in web development and would love to connect with hiring teams. If you have an open role or are looking for someone to contribute to your projects, feel free to reach out. I am eager to bring value and grow within a strong, collaborative environment."
       }
     }
   },

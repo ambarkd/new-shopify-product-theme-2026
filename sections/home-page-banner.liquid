@@ -28,21 +28,20 @@
           {% if section.settings.button_text != blank %}
             <a
               href="{{ section.settings.button_link }}"
-              class="group relative inline-flex items-center justify-center px-7 py-3.5 font-semibold text-white bg-black rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl"
+              class="btn-premium bg-black text-white shadow-xl"
             >
               <span class="relative z-10">{{ section.settings.button_text }}</span>
-              <div
-                class="absolute inset-0 bg-gradient-to-r from-rose-400 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              ></div>
+              <div class="btn-overlay bg-gradient-to-r from-rose-400 to-rose-600"></div>
             </a>
           {% endif %}
 
           {% if section.settings.portfolio_link != blank %}
             <a
               href="{{ section.settings.portfolio_link }}"
-              class="inline-flex items-center justify-center px-7 py-3.5 font-medium text-black border border-black/10 rounded-full hover:bg-black/5 transition-colors"
+              class="btn-premium text-black border border-black/10 shadow-sm"
             >
-              {{ section.settings.portfolio_text | default: 'View Portfolio' }}
+              <span class="relative z-10">{{ section.settings.portfolio_text | default: 'View Portfolio' }}</span>
+              <div class="btn-overlay bg-black/5"></div>
             </a>
           {% endif %}
         </div>
@@ -58,9 +57,9 @@
                 class="w-full h-full object-cover transform transition-transform duration-[2s] group-hover:scale-105"
               >
             </div>
-            <div class="absolute -bottom-4 -right-4 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20 hidden sm:block">
-              <p class="text-[9px] uppercase tracking-widest text-rose-600 font-bold">Expertise</p>
-              <p class="text-lg font-serif">Senior Level</p>
+            <div class="absolute -bottom-4 -right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20 hidden sm:block">
+              <p class="text-[9px] uppercase tracking-widest text-rose-600 font-bold mb-0.5">Experience</p>
+              <p class="text-lg font-serif leading-none">3+ Years</p>
             </div>
           </div>
         {% endif %}
@@ -72,14 +71,14 @@
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
           <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-bold whitespace-nowrap">Expertise In</p>
 
-          <div class="flex flex-wrap gap-6 md:gap-10 items-center justify-center grayscale opacity-50">
+          <div class="flex flex-wrap gap-6 md:gap-10 items-center justify-center">
             {% for block in section.blocks %}
               {% if block.settings.logo != blank %}
-                <div class="flex-shrink-0 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <div class="logo-item flex-shrink-0 transition-all duration-500 transform hover:-translate-y-1">
                   <img
                     src="{{ block.settings.logo | image_url: width: 160 }}"
                     alt="logo"
-                    class="h-6 md:h-7 w-auto object-contain"
+                    class="h-6 md:h-7 w-auto object-contain filter-grayscale hover:filter-none opacity-50 hover:opacity-100 transition-all duration-500"
                   >
                 </div>
               {% endif %}
@@ -91,9 +90,47 @@
   </div>
 
   <style>
+    /* Premium Button Base */
+    .btn-premium {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 1.75rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .btn-premium:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-premium:active {
+      transform: scale(0.95);
+    }
+
+    .btn-overlay {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-premium:hover .btn-overlay {
+      opacity: 1;
+    }
+
+    /* Logo Hover Effects */
+    .filter-grayscale {
+      filter: grayscale(100%);
+    }
+
     .animate-fadeUp {
       animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
+
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -104,9 +141,11 @@
         transform: translateY(0);
       }
     }
+
     .animate-float {
       animation: float 6s ease-in-out infinite;
     }
+
     @keyframes float {
       0%,
       100% {

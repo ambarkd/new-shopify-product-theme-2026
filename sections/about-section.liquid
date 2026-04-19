@@ -27,7 +27,7 @@
               href="{{ section.settings.about_link }}"
               class="group relative inline-flex items-center justify-center px-8 py-4 font-semibold text-white bg-black rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl"
             >
-              <span class="relative z-10">More About Me</span>
+              <span class="relative z-10">{{ section.settings.about_btn_text | default: 'More About Me' }}</span>
               <div
                 class="absolute inset-0 bg-gradient-to-r from-rose-400 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               ></div>
@@ -54,10 +54,10 @@
           {% for block in section.blocks %}
             {% if block.type == 'skill' %}
               <div class="bg-[#faf9f6] p-6 rounded-[2rem] border border-black/5 flex flex-col items-center justify-center text-center transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
-                <div class="w-16 h-16 mb-4 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500">
+                <div class="w-16 h-16 mb-4 flex items-center justify-center transition-all duration-500">
                   {% if block.settings.skill_icon != blank %}
                     <img
-                      src="{{ block.settings.skill_icon | image_url: width: 100 }}"
+                      src="{{ block.settings.skill_icon | image_url: width: 150 }}"
                       alt="{{ block.settings.skill_name }}"
                       class="w-full h-full object-contain"
                     >
@@ -71,11 +71,6 @@
               </div>
             {% endif %}
           {% endfor %}
-        </div>
-
-        <div class="absolute -top-6 -right-6 bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white/20 hidden xl:block">
-          <p class="text-3xl font-serif italic leading-none mb-1">99%</p>
-          <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Client Satisfaction</p>
         </div>
       </div>
     </div>
@@ -105,7 +100,7 @@
       transform: translateY(0px);
     }
     50% {
-      transform: translateY(-15px);
+      transform: translateY(-12px);
     }
   }
 </style>
@@ -118,23 +113,29 @@
       "type": "text",
       "id": "label",
       "label": "Small Top Label",
-      "default": "The Person Behind the Code"
+      "default": "Expertise & Growth"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Driven by design, fueled by coffee."
+      "default": "Elevating brands through code and visibility."
     },
     {
       "type": "textarea",
       "id": "bio_text",
       "label": "About Text",
-      "default": "I specialize in creating pixel-perfect web experiences that combine technical performance with high-end aesthetic value."
+      "default": "I bridge the gap between aesthetic web development and technical search optimization. My goal is to build sites that don't just look premium, but actually rank and perform."
     },
     {
       "type": "header",
-      "content": "Links"
+      "content": "Links & Buttons"
+    },
+    {
+      "type": "text",
+      "id": "about_btn_text",
+      "label": "About Button Text",
+      "default": "More About Me"
     },
     {
       "type": "url",
@@ -161,19 +162,19 @@
           "type": "text",
           "id": "skill_name",
           "label": "Skill Name",
-          "default": "Tailwind CSS"
+          "default": "SEO Improvement"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "About & Skills",
+      "name": "Premium About & Skills",
       "blocks": [
         { "type": "skill", "settings": { "skill_name": "HTML5" } },
-        { "type": "skill", "settings": { "skill_name": "CSS3" } },
+        { "type": "skill", "settings": { "skill_name": "Tailwind CSS" } },
         { "type": "skill", "settings": { "skill_name": "JavaScript" } },
-        { "type": "skill", "settings": { "skill_name": "Tailwind" } }
+        { "type": "skill", "settings": { "skill_name": "SEO Improvement" } }
       ]
     }
   ]

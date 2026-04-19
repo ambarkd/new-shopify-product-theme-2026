@@ -1,0 +1,81 @@
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Select Menu"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Contact Number"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email"
+    },
+    {
+      "type": "url",
+      "id": "linkedin",
+      "label": "LinkedIn URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Footer"
+    }
+  ]
+}
+{% endschema %}
+
+<footer class="bg-gray-100 text-gray-800 mt-10">
+  <div class="mx-auto max-w-6xl px-4 py-10">
+    <!-- Top Section -->
+    <div class="flex flex-col md:flex-row justify-between gap-8">
+      <!-- Left: Store Name -->
+      <div>
+        <h2 class="text-xl font-semibold">
+          {{ shop.name }}
+        </h2>
+      </div>
+
+      <!-- Right: Dynamic Menu -->
+      <div>
+        <h3 class="text-lg font-medium mb-3">Quick Links</h3>
+        <ul class="space-y-2">
+          {% for link in linklists[section.settings.footer_menu].links %}
+            <li>
+              <a href="{{ link.url }}" class="hover:text-black transition">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="border-t mt-8 pt-6 flex flex-col md:flex-row justify-between gap-4 text-sm">
+      <!-- Contact Info -->
+      <div class="space-y-1">
+        {% if section.settings.phone != blank %}
+          <p>📞 {{ section.settings.phone }}</p>
+        {% endif %}
+
+        {% if section.settings.email != blank %}
+          <p>✉️ {{ section.settings.email }}</p>
+        {% endif %}
+      </div>
+
+      <!-- LinkedIn -->
+      {% if section.settings.linkedin != blank %}
+        <div>
+          <a href="{{ section.settings.linkedin }}" target="_blank" class="hover:underline"> LinkedIn </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</footer>

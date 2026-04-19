@@ -1,4 +1,4 @@
-<section class="bg-[#faf9f6] text-[#1a1a1a] py-12 lg:py-20 relative overflow-hidden min-h-screen">
+<section class="bg-[#faf9f6] text-[#1a1a1a] pt-[130px] pb-12 lg:pb-20 relative overflow-hidden min-h-screen">
   <div
     class="absolute top-[-5%] right-[-5%] w-[25%] h-[25%] bg-blue-50/40 rounded-full blur-[100px] pointer-events-none"
   ></div>
@@ -6,7 +6,7 @@
     class="absolute bottom-[20%] left-[-5%] w-[20%] h-[30%] bg-rose-50/30 rounded-full blur-[100px] pointer-events-none"
   ></div>
 
-  <div class="mx-auto max-w-6xl px-6 relative z-10">
+  <div class="mx-auto max-w-[1400px] px-6 relative z-10">
     <div class="mb-16 animate-fadeUp">
       <nav class="flex justify-center mb-8">
         <a
@@ -32,7 +32,7 @@
     </div>
 
     {% paginate collection.products by section.settings.products_per_page %}
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[35px]">
         {% for product in collection.products %}
           <div class="group animate-fadeUp" style="animation-delay: {{ forloop.index0 | times: 0.1 }}s;">
             {% render 'product-cart', product_product: product, show_vendor: section.settings.show_vendor %}
@@ -54,7 +54,6 @@
 </section>
 
 <style>
-  /* Consistency with Hero Animations */
   .animate-fadeUp {
     animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
@@ -69,12 +68,6 @@
       transform: translateY(0);
     }
   }
-
-  /* Optional: Ensure the product-cart snippet fits the premium theme */
-  .group:hover img {
-    transform: scale(1.05);
-    transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
 </style>
 
 {% schema %}
@@ -84,10 +77,10 @@
     {
       "type": "range",
       "id": "products_per_page",
-      "min": 3,
-      "max": 24,
-      "step": 3,
-      "default": 6,
+      "min": 4,
+      "max": 48,
+      "step": 4,
+      "default": 12,
       "label": "Products per page"
     },
     {
@@ -100,7 +93,6 @@
       "type": "textarea",
       "id": "fallback_description",
       "label": "Fallback Description",
-      "info": "Used if the collection itself has no description.",
       "default": "Explore our curated selection of high-quality digital assets and products."
     }
   ]

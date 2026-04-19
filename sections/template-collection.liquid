@@ -31,116 +31,108 @@
       </div>
     </div>
 
-    {% paginate collection.products by section.settings.products_per_page %}
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[35px]">
-        {% for product in collection.products %}
-          <div class="group animate-fadeUp" style="animation-delay: {{ forloop.index0 | times: 0.1 }}s;">
-            {% render 'product-cart', product_product: product, show_vendor: section.settings.show_vendor %}
-          </div>
-        {% else %}
-          <div class="col-span-full py-20 text-center">
-            <p class="text-gray-400 font-serif italic text-xl">No treasures found in this collection.</p>
-          </div>
-        {% endfor %}
-      </div>
-
-      {% if paginate.pages > 1 %}
-        <div class="mt-20 pt-10 border-t border-black/5 flex flex-col items-center gap-8">
-          <nav class="flex items-center justify-center gap-4" role="navigation">
-            {% if paginate.previous %}
-              <a href="{{ paginate.previous.url }}" class="btn-pagination-premium">
-                <span class="relative z-10">Previous</span>
-                <div class="btn-pagination-overlay bg-black"></div>
-              </a>
-            {% endif %}
-
-            <div class="flex items-center gap-2">
-              {% for part in paginate.parts %}
-                {% if part.is_link %}
-                  <a
-                    href="{{ part.url }}"
-                    class="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 hover:border-black transition-all text-sm font-medium"
-                  >
-                    {{ part.title }}
-                  </a>
-                {% else %}
-                  {% if part.title == paginate.current_page %}
-                    <span class="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white text-sm font-medium shadow-lg">
-                      {{ part.title }}
-                    </span>
-                  {% else %}
-                    <span class="w-10 h-10 flex items-center justify-center rounded-full text-gray-300 text-sm">
-                      {{ part.title }}
-                    </span>
-                  {% endif %}
-                {% endif %}
-              {% endfor %}
-            </div>
-
-            {% if paginate.next %}
-              <a href="{{ paginate.next.url }}" class="btn-pagination-premium">
-                <span class="relative z-10">Next</span>
-                <div class="btn-pagination-overlay bg-black"></div>
-              </a>
-            {% endif %}
-          </nav>
-
-          <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
-            Showing {{ paginate.current_offset | plus: 1 }} -
-            {% if paginate.next %}
-              {{ paginate.current_offset | plus: paginate.page_size }}
-            {% else %}
-              {{ paginate.items }}
-            {% endif %}
-            of {{ paginate.items }} items
-          </p>
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[35px]">
+      {% for product in collection.products %}
+        <div
+          class="product-item {% if forloop.index > 4 %}hidden-product{% endif %} group animate-fadeUp"
+          style="animation-delay: {{ forloop.index0 | modulo: 4 | times: 0.1 }}s;"
+        >
+          {% render 'product-cart', product_product: product, show_vendor: section.settings.show_vendor %}
         </div>
-      {% endif %}
-    {% endpaginate %}
+      {% else %}
+        <div class="col-span-full py-20 text-center">
+          <p class="text-gray-400 font-serif italic text-xl">No treasures found in this collection.</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if collection.products.size > 4 %}
+      <div class="mt-20 flex flex-col items-center gap-4">
+        <button id="see-more-btn" class="btn-premium bg-black text-white shadow-xl">
+          <span class="relative z-10">See More</span>
+          <div class="btn-overlay bg-gradient-to-r from-rose-400 to-rose-600"></div>
+        </button>
+        <p id="product-count" class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
+          Showing 4 of {{ collection.products.size }} items
+        </p>
+      </div>
+    {% endif %}
   </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('see-more-btn');
+    const countText = document.getElementById('product-count');
+    const totalItems = {{ collection.products.size }};
+    let currentlyShown = 4;
+
+    if (btn) {
+      btn.addEventListener('click', function() {
+        const hiddenItems = document.querySelectorAll('.hidden-product');
+        
+        // Show next 4 items
+        for (let i = 0; i < 4; i++) {
+          if (hiddenItems[i]) {
+            hiddenItems[i].classList.remove('hidden-product');
+            hiddenItems[i].classList.add('animate-fadeUp');
+            currentlyShown++;
+          }
+        }
+
+        // Update count text
+        countText.innerText = `Showing ${currentlyShown} of ${totalItems} items`;
+
+        // Hide button if no more items
+        if (currentlyShown >= totalItems) {
+          btn.parentElement.style.display = 'none';
+        }
+      });
+    }
+  });
+</script>
+
 <style>
-  /* Premium Pagination Button Styling */
-  .btn-pagination-premium {
+  /* Premium Interaction Styles */
+  .hidden-product {
+    display: none;
+  }
+
+  .btn-premium {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.6rem 1.5rem;
-    font-size: 0.875rem;
+    padding: 0.875rem 2.5rem;
     font-weight: 600;
-    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 9999px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .btn-pagination-premium:hover {
-    color: white;
-    border-color: black;
-    transform: translateY(-2px);
+  .btn-premium:hover {
+    transform: scale(1.05);
   }
 
-  .btn-pagination-overlay {
+  .btn-overlay {
     position: absolute;
     inset: 0;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
-  .btn-pagination-premium:hover .btn-pagination-overlay {
-    transform: translateY(0);
+  .btn-premium:hover .btn-overlay {
+    opacity: 1;
   }
 
   .animate-fadeUp {
-    animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -153,15 +145,6 @@
 {
   "name": "Template Collection",
   "settings": [
-    {
-      "type": "range",
-      "id": "products_per_page",
-      "min": 4,
-      "max": 48,
-      "step": 4,
-      "default": 12,
-      "label": "Products per page"
-    },
     {
       "type": "checkbox",
       "id": "show_vendor",

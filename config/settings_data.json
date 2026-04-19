@@ -21,8 +21,9 @@
         "type": "footer",
         "settings": {
           "footer_menu": "footer",
-          "phone": "9874061784",
+          "footer_bio": "",
           "email": "ambar.dh56@gmail.com",
+          "github": "https://github.com/ambarkd",
           "linkedin": "https://www.linkedin.com/in/ambar-dhara-867a68239/"
         }
       }

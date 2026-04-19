@@ -334,6 +334,9 @@
   .bottom-\[10\%\] {
     bottom: 10%;
   }
+  .bottom-\[20\%\] {
+    bottom: 20%;
+  }
   .-left-6 {
     left: calc(var(--spacing) * -6);
   }
@@ -351,6 +354,9 @@
   }
   .z-50 {
     z-index: 50;
+  }
+  .col-span-full {
+    grid-column: 1 / -1;
   }
   .container {
     width: 100%;
@@ -563,6 +569,9 @@
   .h-\[20\%\] {
     height: 20%;
   }
+  .h-\[25\%\] {
+    height: 25%;
+  }
   .h-\[30\%\] {
     height: 30%;
   }
@@ -580,6 +589,9 @@
   }
   .max-h-8 {
     max-height: calc(var(--spacing) * 8);
+  }
+  .min-h-screen {
+    min-height: 100vh;
   }
   .w-1 {
     width: calc(var(--spacing) * 1);
@@ -1039,6 +1051,12 @@
   }
   .bg-rose-50 {
     background-color: var(--color-rose-50);
+  }
+  .bg-rose-50\/30 {
+    background-color: color-mix(in srgb, oklch(96.9% 0.015 12.422) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-rose-50) 30%, transparent);
+    }
   }
   .bg-rose-50\/50 {
     background-color: color-mix(in srgb, oklch(96.9% 0.015 12.422) 50%, transparent);
@@ -1651,6 +1669,14 @@
       color: var(--color-black);
     }
   }
+  .group-hover\:-translate-x-1 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        --tw-translate-x: calc(var(--spacing) * -1);
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+      }
+    }
+  }
   .group-hover\:-translate-y-1 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -1871,6 +1897,13 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-red-700);
+      }
+    }
+  }
+  .hover\:text-rose-600 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-rose-600);
       }
     }
   }
@@ -2273,6 +2306,11 @@
       gap: calc(var(--spacing) * 12);
     }
   }
+  .lg\:gap-14 {
+    @media (width >= 64rem) {
+      gap: calc(var(--spacing) * 14);
+    }
+  }
   .lg\:gap-20 {
     @media (width >= 64rem) {
       gap: calc(var(--spacing) * 20);
@@ -2281,6 +2319,11 @@
   .lg\:py-14 {
     @media (width >= 64rem) {
       padding-block: calc(var(--spacing) * 14);
+    }
+  }
+  .lg\:py-20 {
+    @media (width >= 64rem) {
+      padding-block: calc(var(--spacing) * 20);
     }
   }
   .lg\:py-24 {

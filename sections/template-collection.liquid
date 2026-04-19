@@ -1,39 +1,107 @@
-<div class="py-4 px-4">
-  <a href="{{ routes.collections_url }}" class="text-gray-500 hover:underline text-base text-center block px-4 py-4"
-    >Go Back to Collections</a
-  >
-  {% paginate collection.products by section.settings.products_per_page %}
-    <h1 class="text-3xl text-center">{{ collection.title }}</h1>
+<section class="bg-[#faf9f6] text-[#1a1a1a] py-12 lg:py-20 relative overflow-hidden min-h-screen">
+  <div
+    class="absolute top-[-5%] right-[-5%] w-[25%] h-[25%] bg-blue-50/40 rounded-full blur-[100px] pointer-events-none"
+  ></div>
+  <div
+    class="absolute bottom-[20%] left-[-5%] w-[20%] h-[30%] bg-rose-50/30 rounded-full blur-[100px] pointer-events-none"
+  ></div>
 
-    <div class="mx-auto max-w-6xl">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
-        {% for product in collection.products %}
-          {% render 'product-cart', product_product: product, show_vendor: section.settings.show_vendor %}
-        {% else %}
-          <p>There are no products in this collection.</p>
-        {% endfor %}
+  <div class="mx-auto max-w-6xl px-6 relative z-10">
+    <div class="mb-16 animate-fadeUp">
+      <nav class="flex justify-center mb-8">
+        <a
+          href="{{ routes.collections_url }}"
+          class="group flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-rose-600 transition-colors"
+        >
+          <span class="transform group-hover:-translate-x-1 transition-transform">←</span>
+          Back to Collections
+        </a>
+      </nav>
+
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-serif italic leading-tight mb-6">
+          {{ collection.title }}
+        </h1>
+
+        {% if collection.description != blank or section.settings.fallback_description != blank %}
+          <p class="text-gray-500 font-light tracking-wide max-w-2xl mx-auto leading-relaxed text-lg">
+            {{ collection.description | default: section.settings.fallback_description }}
+          </p>
+        {% endif %}
       </div>
     </div>
 
-    {% render 'pagination', pagination: paginate %}
-  {% endpaginate %}
-</div>
+    {% paginate collection.products by section.settings.products_per_page %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
+        {% for product in collection.products %}
+          <div class="group animate-fadeUp" style="animation-delay: {{ forloop.index0 | times: 0.1 }}s;">
+            {% render 'product-cart', product_product: product, show_vendor: section.settings.show_vendor %}
+          </div>
+        {% else %}
+          <div class="col-span-full py-20 text-center">
+            <p class="text-gray-400 font-serif italic text-xl">No treasures found in this collection.</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        <div class="mt-20 pt-10 border-t border-black/5">
+          {% render 'pagination', pagination: paginate %}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
+<style>
+  /* Consistency with Hero Animations */
+  .animate-fadeUp {
+    animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Optional: Ensure the product-cart snippet fits the premium theme */
+  .group:hover img {
+    transform: scale(1.05);
+    transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+</style>
 
 {% schema %}
 {
   "name": "Template Collection",
   "settings": [
     {
-      "type": "number",
+      "type": "range",
       "id": "products_per_page",
+      "min": 3,
+      "max": 24,
+      "step": 3,
       "default": 6,
       "label": "Products per page"
     },
     {
       "type": "checkbox",
       "id": "show_vendor",
-      "default": true,
+      "default": false,
       "label": "Show Vendor Name"
+    },
+    {
+      "type": "textarea",
+      "id": "fallback_description",
+      "label": "Fallback Description",
+      "info": "Used if the collection itself has no description.",
+      "default": "Explore our curated selection of high-quality digital assets and products."
     }
   ]
 }

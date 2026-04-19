@@ -21,11 +21,11 @@
       {% endif %}
     </div>
 
-    <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[35px]">
-      {% for collection in collections %}
-        {% if collection.all_products_count > 0 %}
+    {% paginate collections by 50 %}
+      <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[35px]">
+        {% for collection in collections %}
           <div
-            class="collection-item {% if forloop.index > 4 %}hidden-item{% endif %} group animate-fadeUp"
+            class="collection-item group animate-fadeUp"
             style="animation-delay: {{ forloop.index0 | modulo: 4 | times: 0.1 }}s;"
           >
             <a href="{{ collection.url }}" class="block">
@@ -41,7 +41,7 @@
                     class="w-full h-full object-cover transform transition-transform duration-[2s] group-hover:scale-110"
                   >
                 {% else %}
-                  <div class="w-full h-full flex items-center justify-center bg-white">
+                  <div class="w-full h-full flex items-center justify-center bg-white border border-black/5 rounded-[2.5rem]">
                     {{ 'collection-1' | placeholder_svg_tag: 'w-20 h-20 text-gray-200' }}
                   </div>
                 {% endif %}
@@ -51,7 +51,7 @@
                 ></div>
               </div>
 
-              <div class="text-center lg:text-left">
+              <div class="text-center lg:text-left px-2">
                 <h2 class="text-2xl font-serif italic mb-2 transition-colors group-hover:text-rose-600">
                   {{ collection.title }}
                 </h2>
@@ -61,93 +61,19 @@
               </div>
             </a>
           </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    {% assign active_collections = 0 %}
-    {% for collection in collections %}
-      {% if collection.all_products_count > 0 -%}
-        {%- assign active_collections = active_collections | plus: 1 -%}
-      {%- endif %}
-    {% endfor %}
-
-    {% if active_collections > 4 %}
-      <div class="mt-20 flex flex-col items-center gap-4">
-        <button id="see-more-btn" class="btn-premium bg-black text-white shadow-xl">
-          <span class="relative z-10">Explore More</span>
-          <div class="btn-overlay bg-gradient-to-r from-rose-400 to-rose-600"></div>
-        </button>
-        <p id="item-count" class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
-          Showing 4 of {{ active_collections }} Categories
-        </p>
+        {% endfor %}
       </div>
-    {% endif %}
+
+      {% if paginate.pages > 1 %}
+        <div class="mt-12 flex justify-center">
+          {% render 'pagination', pagination: paginate %}
+        </div>
+      {% endif %}
+    {% endpaginate %}
   </div>
 </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const btn = document.getElementById('see-more-btn');
-    const countText = document.getElementById('item-count');
-    const items = document.querySelectorAll('.collection-item');
-    const totalItems = items.length;
-    let currentlyShown = 4;
-
-    if (btn) {
-      btn.addEventListener('click', function () {
-        const hiddenItems = document.querySelectorAll('.hidden-item');
-
-        for (let i = 0; i < 4; i++) {
-          if (hiddenItems[i]) {
-            hiddenItems[i].classList.remove('hidden-item');
-            hiddenItems[i].classList.add('animate-fadeUp');
-            currentlyShown++;
-          }
-        }
-
-        countText.innerText = `Showing ${currentlyShown} of ${totalItems} Categories`;
-
-        if (currentlyShown >= totalItems) {
-          btn.parentElement.style.display = 'none';
-        }
-      });
-    }
-  });
-</script>
-
 <style>
-  .hidden-item {
-    display: none;
-  }
-
-  .btn-premium {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 2.5rem;
-    font-weight: 600;
-    border-radius: 9999px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .btn-premium:hover {
-    transform: scale(1.05);
-  }
-
-  .btn-overlay {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .btn-premium:hover .btn-overlay {
-    opacity: 1;
-  }
-
   .animate-fadeUp {
     animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }

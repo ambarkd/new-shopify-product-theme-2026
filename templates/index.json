@@ -107,19 +107,28 @@
             "skill_icon": "shopify://shop_images/Tailwind_CSS.png",
             "skill_name": "Tailwind"
           }
+        },
+        "skill_i7KNap": {
+          "type": "skill",
+          "settings": {
+            "skill_icon": "shopify://shop_images/data-analysis.png",
+            "skill_name": "SEO Improvement"
+          }
         }
       },
       "block_order": [
         "skill_QkLhji",
         "skill_7RhFYe",
         "skill_GTYiKL",
-        "skill_KEyAxb"
+        "skill_KEyAxb",
+        "skill_i7KNap"
       ],
       "name": "About & Skills",
       "settings": {
         "label": "The Person Behind the Code",
         "heading": "Driven by design, fueled by coffee.",
         "bio_text": "I specialize in creating pixel-perfect web experiences that combine technical performance with high-end aesthetic value.",
+        "about_btn_text": "More About Me",
         "about_link": "shopify://pages/about-us",
         "linkedin_link": "https://www.linkedin.com/in/ambar-dhara-867a68239/"
       }

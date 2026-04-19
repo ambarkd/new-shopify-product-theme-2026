@@ -77,6 +77,49 @@
         "image": "shopify://shop_images/Ambar_kumar_dhara.png"
       }
     },
+    "about_section_YgVTqQ": {
+      "type": "about-section",
+      "blocks": {
+        "skill_QkLhji": {
+          "type": "skill",
+          "settings": {
+            "skill_name": "HTML5"
+          }
+        },
+        "skill_7RhFYe": {
+          "type": "skill",
+          "settings": {
+            "skill_name": "CSS3"
+          }
+        },
+        "skill_GTYiKL": {
+          "type": "skill",
+          "settings": {
+            "skill_name": "JavaScript"
+          }
+        },
+        "skill_KEyAxb": {
+          "type": "skill",
+          "settings": {
+            "skill_name": "Tailwind"
+          }
+        }
+      },
+      "block_order": [
+        "skill_QkLhji",
+        "skill_7RhFYe",
+        "skill_GTYiKL",
+        "skill_KEyAxb"
+      ],
+      "name": "About & Skills",
+      "settings": {
+        "label": "The Person Behind the Code",
+        "heading": "Driven by design, fueled by coffee.",
+        "bio_text": "I specialize in creating pixel-perfect web experiences that combine technical performance with high-end aesthetic value.",
+        "about_link": "shopify://pages/about-us",
+        "linkedin_link": "https://www.linkedin.com/in/ambar-dhara-867a68239/"
+      }
+    },
     "feature-collection": {
       "type": "featured-collection",
       "settings": {
@@ -98,6 +141,7 @@
   },
   "order": [
     "home_page_banner_74mrHh",
+    "about_section_YgVTqQ",
     "feature-collection",
     "contact_form_EXyBBF"
   ]

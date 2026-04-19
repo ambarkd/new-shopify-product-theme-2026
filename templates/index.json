@@ -59,12 +59,14 @@
       ],
       "name": "Home Page Banner",
       "settings": {
+        "bg_image": "shopify://shop_images/hero_BG.webp",
         "heading": "Ambar Kumar Dhara",
         "subtext": "I design and develop modern, high performing websites with a focus on clean design and usability. I work with Shopify, WordPress, and other CMS platforms to build scalable and efficient solutions. This development store showcases how different features and layouts can be implemented in real projects. My goal is to create experiences that look professional and work seamlessly across devices.",
         "button_text": "Contact",
         "button_link": "/pages/contact",
         "portfolio_text": "View Portfolio",
         "portfolio_link": "/",
+        "experience": "3+ Years",
         "image": "shopify://shop_images/Ambar_kumar_dhara.png"
       }
     },

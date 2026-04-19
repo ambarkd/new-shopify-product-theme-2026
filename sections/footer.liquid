@@ -1,6 +1,6 @@
 <footer class="bg-black text-gray-300 mt-16">
   <div class="mx-auto max-w-6xl px-4 py-12">
-    <!-- Top Section -->
+    <!-- Grid Layout -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
       <!-- Store Info -->
       <div>
@@ -24,7 +24,7 @@
         </ul>
       </div>
 
-      <!-- Contact Info -->
+      <!-- Contact -->
       <div>
         <h3 class="text-lg font-medium text-white mb-4">Contact</h3>
 
@@ -46,22 +46,21 @@
               </a>
             </p>
           {% endif %}
+
+          {% if section.settings.linkedin != blank %}
+            <p>
+              🔗
+              <a href="{{ section.settings.linkedin }}" target="_blank" class="hover:text-white"> LinkedIn </a>
+            </p>
+          {% endif %}
         </div>
       </div>
     </div>
 
-    <!-- Bottom Section -->
-    <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-      <!-- Copyright -->
-      <p class="text-gray-500">
-        © {{ 'now' | date: '%Y' }}
-        {{ shop.name }}. All rights reserved.
-      </p>
-
-      <!-- LinkedIn -->
-      {% if section.settings.linkedin != blank %}
-        <a href="{{ section.settings.linkedin }}" target="_blank" class="hover:text-white transition"> LinkedIn </a>
-      {% endif %}
+    <!-- Bottom Centered Copyright -->
+    <div class="border-t border-gray-800 mt-10 pt-6 text-center text-sm text-gray-500">
+      © {{ 'now' | date: '%Y' }}
+      {{ shop.name }}. All rights reserved.
     </div>
   </div>
 

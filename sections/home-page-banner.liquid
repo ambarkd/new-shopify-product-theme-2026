@@ -67,7 +67,7 @@
               >
             </div>
 
-            <!-- Dynamic Experience Card -->
+            <!-- Experience Card -->
             {% if section.settings.experience != blank %}
               <div class="absolute -bottom-4 -right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20 hidden sm:block">
                 <p class="text-[9px] uppercase tracking-widest text-rose-600 font-bold mb-0.5">Experience</p>
@@ -81,24 +81,27 @@
       </div>
     </div>
 
-    <!-- Logos -->
+    <!-- Logos Section -->
     {% if section.blocks.size > 0 %}
-      <div class="mt-16 pt-8 border-t border-black/5 text-center">
-        <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-bold mb-6">Expertise In</p>
+      <div class="mt-16 pt-8 border-t border-black/5">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <!-- Left -->
+          <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-bold whitespace-nowrap">Expertise In</p>
 
-        <div class="flex flex-wrap gap-6 md:gap-10 items-center justify-center">
-          {% for block in section.blocks %}
-            {% if block.settings.logo != blank %}
-              <div class="logo-item transition-all duration-500 hover:-translate-y-1">
-                <!-- Original color visible -->
-                <img
-                  src="{{ block.settings.logo | image_url: width: 180 }}"
-                  alt="logo"
-                  class="h-7 md:h-8 w-auto object-contain opacity-90 hover:opacity-100 transition duration-300"
-                >
-              </div>
-            {% endif %}
-          {% endfor %}
+          <!-- Right Logos -->
+          <div class="flex flex-wrap gap-6 md:gap-10 items-center justify-center md:justify-end">
+            {% for block in section.blocks %}
+              {% if block.settings.logo != blank %}
+                <div class="logo-item flex-shrink-0 transition-all duration-500 transform hover:-translate-y-1">
+                  <img
+                    src="{{ block.settings.logo | image_url: width: 180 }}"
+                    alt="logo"
+                    class="h-7 md:h-8 w-auto object-contain opacity-90 hover:opacity-100 transition duration-300"
+                  >
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
       </div>
     {% endif %}

@@ -1,26 +1,26 @@
-<section class="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-800 text-white pt-[75px] relative overflow-hidden">
-  <!-- Subtle Glow -->
+<section class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 text-white pt-[75px] relative overflow-hidden">
+  <!-- Soft Glow Background -->
   <div
-    class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.06),transparent_40%)] pointer-events-none"
+    class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_40%)] pointer-events-none"
   ></div>
 
   <div class="mx-auto max-w-6xl px-4 py-16 relative z-10">
     <!-- Top Section -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
       <!-- Left Content -->
-      <div class="text-center md:text-left">
+      <div class="text-center md:text-left animate-fadeUp">
         <h1 class="text-3xl md:text-5xl font-semibold leading-tight mb-6">
           {{ section.settings.heading }}
         </h1>
 
-        <p class="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0">
+        <p class="text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
           {{ section.settings.subtext }}
         </p>
 
         {% if section.settings.button_text != blank %}
           <a
             href="{{ section.settings.button_link }}"
-            class="inline-block bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition shadow-lg"
+            class="inline-block bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition shadow-md"
           >
             {{ section.settings.button_text }}
           </a>
@@ -28,12 +28,12 @@
       </div>
 
       <!-- Right Image -->
-      <div class="flex justify-center">
+      <div class="flex justify-center animate-float">
         {% if section.settings.image != blank %}
           <img
             src="{{ section.settings.image | image_url: width: 500 }}"
             alt="banner"
-            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border border-gray-700 shadow-xl"
+            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border border-gray-600 shadow-2xl"
           >
         {% endif %}
       </div>
@@ -41,28 +41,29 @@
 
     <!-- Tools Section -->
     {% if section.blocks.size > 0 %}
-      <div class="mt-16 text-center md:text-left">
-        <p class="text-gray-500 mb-6 tracking-wide text-sm uppercase">Worked with</p>
-
+      <div class="mt-20 text-center">
         <!-- Logo Row -->
-        <div class="flex gap-12 items-center justify-start md:justify-between overflow-x-auto no-scrollbar py-2">
+        <div class="flex gap-12 md:gap-16 items-center justify-center overflow-x-auto no-scrollbar py-2">
           {% for block in section.blocks %}
             {% if block.settings.logo != blank %}
-              <div class="flex-shrink-0 opacity-60 hover:opacity-100 hover:scale-105 transition duration-300">
+              <div class="flex-shrink-0 opacity-70 hover:opacity-100 hover:scale-110 transition duration-300">
                 <img
-                  src="{{ block.settings.logo | image_url: width: 180 }}"
+                  src="{{ block.settings.logo | image_url: width: 220 }}"
                   alt="logo"
-                  class="h-10 md:h-12 object-contain"
+                  class="h-12 md:h-14 object-contain"
                 >
               </div>
             {% endif %}
           {% endfor %}
         </div>
+
+        <!-- Text Below Logos -->
+        <p class="text-gray-400 mt-6 text-sm tracking-wide">Technologies I work with</p>
       </div>
     {% endif %}
   </div>
 
-  <!-- Hide scrollbar -->
+  <!-- Animations + Scrollbar -->
   <style>
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -70,6 +71,37 @@
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+
+    /* Fade Up Animation */
+    .animate-fadeUp {
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Floating Image */
+    .animate-float img {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
     }
   </style>
 

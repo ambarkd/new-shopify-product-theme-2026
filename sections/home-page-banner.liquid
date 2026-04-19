@@ -1,4 +1,22 @@
-<section class="bg-[#faf9f6] text-[#1a1a1a] pt-[80px] lg:pt-[100px] relative overflow-hidden">
+<section
+  class="
+    text-[#1a1a1a] pt-[80px] lg:pt-[100px] relative overflow-hidden
+    {% if section.settings.bg_image == blank %} bg-[#faf9f6] {% endif %}
+  "
+>
+  <!-- Background Image -->
+  {% if section.settings.bg_image != blank %}
+    <div class="absolute inset-0 -z-10">
+      <img
+        src="{{ section.settings.bg_image | image_url: width: 2000 }}"
+        alt="background"
+        class="w-full h-full object-cover"
+      >
+      <!-- Overlay for readability -->
+      <div class="absolute inset-0 bg-white/70"></div>
+    </div>
+  {% endif %}
+
   <!-- Background Blobs -->
   <div
     class="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] bg-rose-100/30 rounded-full blur-[80px] pointer-events-none"
@@ -11,7 +29,6 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
       <!-- Left -->
       <div class="lg:col-span-7 text-center lg:text-left animate-fadeUp">
-        <!-- Status Badge -->
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 mb-6">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-[10px] uppercase tracking-[0.2em] text-emerald-700 font-bold">
@@ -19,25 +36,19 @@
           </span>
         </div>
 
-        <!-- Heading -->
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif italic tracking-tight leading-[1.05] mb-6">
           <span class="block transform -skew-x-3">
             {{ section.settings.heading }}
           </span>
         </h1>
 
-        <!-- Subtext -->
         <p class="text-base md:text-lg text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light">
           {{ section.settings.subtext }}
         </p>
 
-        <!-- Buttons -->
         <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
           {% if section.settings.button_text != blank %}
-            <a
-              href="{{ section.settings.button_link }}"
-              class="btn-premium bg-black text-white shadow-xl"
-            >
+            <a href="{{ section.settings.button_link }}" class="btn-premium bg-black text-white shadow-xl">
               <span class="relative z-10">{{ section.settings.button_text }}</span>
               <div class="btn-overlay bg-gradient-to-r from-rose-400 to-rose-600"></div>
             </a>
@@ -69,7 +80,6 @@
               >
             </div>
 
-            <!-- Experience Card -->
             {% if section.settings.experience != blank %}
               <div class="absolute -bottom-4 -right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20 hidden sm:block">
                 <p class="text-[9px] uppercase tracking-widest text-rose-600 font-bold mb-0.5">Experience</p>
@@ -83,14 +93,12 @@
       </div>
     </div>
 
-    <!-- Logos Section -->
+    <!-- Logos -->
     {% if section.blocks.size > 0 %}
       <div class="mt-16 pt-8 border-t border-black/5">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-          <!-- Left -->
           <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-bold whitespace-nowrap">Expertise In</p>
 
-          <!-- Right Logos -->
           <div class="flex flex-wrap gap-6 md:gap-10 items-center justify-center md:justify-end">
             {% for block in section.blocks %}
               {% if block.settings.logo != blank %}
@@ -126,7 +134,6 @@
     .btn-premium:hover {
       transform: scale(1.05);
     }
-
     .btn-premium:active {
       transform: scale(0.95);
     }
@@ -176,6 +183,8 @@
 {
   "name": "Premium Job Banner",
   "settings": [
+    { "type": "image_picker", "id": "bg_image", "label": "Background Image" },
+
     { "type": "text", "id": "heading", "label": "Heading", "default": "Building Digital Excellence." },
     {
       "type": "textarea",

@@ -1,100 +1,148 @@
-<div class="flex items-center justify-center py-12 bg-gray-50">
-  {% form 'contact' %}
-    <div class="w-full max-w-4xl bg-white shadow-lg rounded-2xl p-10">
-      {% if section.settings.form_name != blank %}
-        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">{{ section.settings.form_name }}</h2>
-      {% endif %}
-      {% if form.errors %}
-        <div class="border p-3 rounded-b-sm">
-          <div class="flex flex-row items-center w-full my-3">
-            <div class="text-red-500">
-              {% render 'icon-failed' %}
-            </div>
-            <div class="text-sm font-medium ml-3">Oh! Something went wrong. Please try again..</div>
-          </div>
-          <ul class="px-4 mb-3 ml-7 list-decimal">
-            {% for error in form.errors %}
-              <li>
-                <span> {{ form.errors | default_errors }}</span>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% elsif form.posted_successfully? %}
-        <div class="border p-3 rounded-b-sm">
-          <div class="flex flex-row items-center w-full my-3">
-            <div class="text-green-500">
-              {% render 'icon-success' %}
-            </div>
-            <div class="text-sm font-medium ml-3">Comment posted successfully!</div>
-          </div>
-        </div>
-      {% endif %}
+<section class="bg-white text-[#1a1a1a] py-16 lg:py-24 relative overflow-hidden">
+  <div
+    class="absolute bottom-[-5%] left-[-5%] w-[20%] h-[20%] bg-rose-50/50 rounded-full blur-[80px] pointer-events-none"
+  ></div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Name -->
-        <div class="flex flex-col space-y-2">
-          <label for="contact_form" class="text-sm font-medium text-gray-600"> Name </label>
-          <input
-            type="text"
-            name="contact[name]"
-            id="contact_form"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black transition"
-            placeholder="Enter your name"
-          >
-        </div>
+  <div class="mx-auto max-w-6xl px-6 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+      <div class="animate-fadeUp">
+        <span class="inline-block text-[10px] uppercase tracking-[0.3em] text-rose-600 font-bold mb-4"
+          >Get in Touch</span
+        >
+        <h2 class="text-4xl md:text-5xl font-serif italic leading-[1.1] mb-6">
+          {{ section.settings.form_name }}
+        </h2>
+        <p class="text-lg text-gray-500 font-light tracking-wide leading-relaxed max-w-md">
+          {{ section.settings.description }}
+        </p>
 
-        <!-- Email -->
-        <div class="flex flex-col space-y-2">
-          <label for="contact_email" class="text-sm font-medium text-gray-600"> Email Address </label>
-          <input
-            type="email"
-            name="contact[email]"
-            id="contact_email"
-            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black transition"
-            placeholder="Enter your email"
-          >
+        <div class="mt-10 pt-10 border-t border-black/5 hidden lg:block">
+          <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400 font-bold mb-2">Typically Responds Within</p>
+          <p class="text-xl font-serif italic">24 Hours</p>
         </div>
       </div>
 
-      <!-- Message (full width) -->
-      <div class="flex flex-col space-y-2 mt-6">
-        <label for="contact_message" class="text-sm font-medium text-gray-600"> Message </label>
-        <textarea
-          name="contact[body]"
-          id="contact_message"
-          rows="5"
-          class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black transition resize-none"
-          placeholder="Write your message..."
-        ></textarea>
-      </div>
+      <div class="animate-fadeUp" style="animation-delay: 0.2s;">
+        {% form 'contact', class: 'w-full' %}
+          {% if form.errors %}
+            <div class="mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm">
+              <p class="font-bold mb-1 italic">Please correct the following:</p>
+              {{ form.errors | default_errors }}
+            </div>
+          {% elsif form.posted_successfully? %}
+            <div class="mb-6 p-4 bg-emerald-50 border border-emerald-100 rounded-2xl text-emerald-700 text-sm flex items-center gap-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              Message sent successfully. I'll be in touch soon!
+            </div>
+          {% endif %}
 
-      <!-- Button -->
-      <button
-        type="submit"
-        class="w-full mt-6 bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition duration-300"
-      >
-        Submit Message
-      </button>
+          <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="group">
+                <label
+                  for="contact_form"
+                  class="text-[10px] uppercase tracking-widest text-gray-400 font-bold ml-1 mb-2 block transition-colors group-focus-within:text-black"
+                >
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="contact[name]"
+                  id="contact_form"
+                  class="w-full bg-[#faf9f6] border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black/5 transition-all outline-none placeholder:text-gray-300"
+                  placeholder="Jane Doe"
+                  required
+                >
+              </div>
+
+              <div class="group">
+                <label
+                  for="contact_email"
+                  class="text-[10px] uppercase tracking-widest text-gray-400 font-bold ml-1 mb-2 block transition-colors group-focus-within:text-black"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="contact[email]"
+                  id="contact_email"
+                  class="w-full bg-[#faf9f6] border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black/5 transition-all outline-none placeholder:text-gray-300"
+                  placeholder="hello@domain.com"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="group">
+              <label
+                for="contact_message"
+                class="text-[10px] uppercase tracking-widest text-gray-400 font-bold ml-1 mb-2 block transition-colors group-focus-within:text-black"
+              >
+                Project Details
+              </label>
+              <textarea
+                name="contact[body]"
+                id="contact_message"
+                rows="4"
+                class="w-full bg-[#faf9f6] border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black/5 transition-all outline-none placeholder:text-gray-300 resize-none"
+                placeholder="Tell me about your goals..."
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="group relative w-full inline-flex items-center justify-center px-8 py-4 font-semibold text-white bg-black rounded-full overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-xl"
+            >
+              <span class="relative z-10">Send Message</span>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-rose-400 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              ></div>
+            </button>
+          </div>
+        {% endform %}
+      </div>
     </div>
-  {% endform %}
-</div>
+  </div>
+</section>
 
 {% schema %}
 {
-  "name": "Contact Form",
+  "name": "Premium Contact Form",
   "settings": [
     {
       "type": "text",
       "id": "form_name",
       "label": "Form Title",
-      "default": "Contact Form"
+      "default": "Let's start a conversation."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Form Description",
+      "default": "I'm currently accepting new projects and job opportunities. Tell me about your vision and let's create something exceptional together."
     }
   ],
   "presets": [
     {
-      "name": "Contact Form"
+      "name": "Premium Contact Form"
     }
   ]
 }
 {% endschema %}
+
+<style>
+  .animate-fadeUp {
+    animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

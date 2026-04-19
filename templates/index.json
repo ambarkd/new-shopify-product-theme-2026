@@ -11,6 +11,17 @@
   "sections": {
     "home_page_banner_74mrHh": {
       "type": "home-page-banner",
+      "blocks": {
+        "logo_HYKH9J": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/shopify.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_HYKH9J"
+      ],
       "name": "Home Page Banner",
       "settings": {
         "heading": "Ambar Kumar Dhara",

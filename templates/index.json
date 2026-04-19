@@ -12,16 +12,28 @@
     "home_page_banner_74mrHh": {
       "type": "home-page-banner",
       "blocks": {
-        "logo_dnYGwF": {
+        "logo_HYKH9J": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/squarespace.png"
+            "logo": "shopify://shop_images/shopify.png"
           }
         },
         "logo_hCfgpU": {
           "type": "logo",
           "settings": {
             "logo": "shopify://shop_images/social.png"
+          }
+        },
+        "logo_W8T64z": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/wordpress.png"
+          }
+        },
+        "logo_dnYGwF": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/squarespace.png"
           }
         },
         "logo_QHyY6a": {
@@ -35,27 +47,15 @@
           "settings": {
             "logo": "shopify://shop_images/atom.png"
           }
-        },
-        "logo_W8T64z": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/wordpress.png"
-          }
-        },
-        "logo_HYKH9J": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/shopify.png"
-          }
         }
       },
       "block_order": [
-        "logo_dnYGwF",
+        "logo_HYKH9J",
         "logo_hCfgpU",
-        "logo_QHyY6a",
-        "logo_wX674z",
         "logo_W8T64z",
-        "logo_HYKH9J"
+        "logo_dnYGwF",
+        "logo_QHyY6a",
+        "logo_wX674z"
       ],
       "name": "Home Page Banner",
       "settings": {

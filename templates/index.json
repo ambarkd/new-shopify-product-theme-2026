@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "home_page_banner_74mrHh": {
+      "type": "home-page-banner",
+      "name": "Home Page Banner",
+      "settings": {
+        "heading": "Ambar Kumar Dhara",
+        "subtext": "Intro text goes here. Describe your work or brand.",
+        "button_text": "Let's get started",
+        "button_link": ""
+      }
+    },
     "feature-collection": {
       "type": "featured-collection",
       "settings": {
@@ -26,6 +36,7 @@
     }
   },
   "order": [
+    "home_page_banner_74mrHh",
     "feature-collection",
     "contact_form_EXyBBF"
   ]

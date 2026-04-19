@@ -1,50 +1,168 @@
-<div class="flex flex-col items-center my-10 px-4">
-  <h1 class="text-3xl md:text-4xl font-semibold tracking-tight mb-6">
-    {{ section.settings.page_title }}
-  </h1>
+<section class="bg-[#faf9f6] text-[#1a1a1a] pt-[130px] pb-12 lg:pb-20 relative overflow-hidden min-h-screen">
+  <div
+    class="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] bg-rose-100/20 rounded-full blur-[100px] pointer-events-none"
+  ></div>
+  <div
+    class="absolute bottom-[10%] right-[-5%] w-[25%] h-[30%] bg-blue-50/40 rounded-full blur-[100px] pointer-events-none"
+  ></div>
 
-  <div class="max-w-6xl mx-auto w-full">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  <div class="mx-auto max-w-[1400px] px-6 relative z-10">
+    <div class="text-center mb-16 animate-fadeUp">
+      <span class="inline-block text-[10px] uppercase tracking-[0.3em] text-rose-600 font-bold mb-4">
+        {{ section.settings.label | default: 'Categories' }}
+      </span>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif italic leading-[1.1] mb-6">
+        {{ section.settings.page_title }}
+      </h1>
+      {% if section.settings.description != blank %}
+        <p class="text-gray-500 font-light tracking-wide max-w-2xl mx-auto leading-relaxed text-lg">
+          {{ section.settings.description }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[35px]">
       {% for collection in collections %}
         {% if collection.all_products_count > 0 %}
-          <div class="group">
-            <a href="{{ collection.url }}">
-              <div class="relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition duration-300 bg-white">
-                <!-- Image -->
-                <div class="h-64 overflow-hidden">
-                  {% if collection.featured_image != blank %}
-                    {% assign collection_image = collection.featured_image %}
-                  {% else %}
-                    {% assign collection_image = collection.products.first.featured_image %}
-                  {% endif %}
+          <div
+            class="collection-item {% if forloop.index > 4 %}hidden-item{% endif %} group animate-fadeUp"
+            style="animation-delay: {{ forloop.index0 | modulo: 4 | times: 0.1 }}s;"
+          >
+            <a href="{{ collection.url }}" class="block">
+              <div class="relative overflow-hidden rounded-[2.5rem] shadow-sm group-hover:shadow-xl transition-all duration-500 mb-6 aspect-[4/5]">
+                {% assign collection_image = collection.featured_image
+                  | default: collection.products.first.featured_image
+                %}
 
+                {% if collection_image != blank %}
                   <img
-                    src="{{ collection_image | img_url }}"
+                    src="{{ collection_image | image_url: width: 800 }}"
                     alt="{{ collection.title | escape }}"
-                    class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500 ease-in-out"
+                    class="w-full h-full object-cover transform transition-transform duration-[2s] group-hover:scale-110"
                   >
-                </div>
+                {% else %}
+                  <div class="w-full h-full flex items-center justify-center bg-white">
+                    {{ 'collection-1' | placeholder_svg_tag: 'w-20 h-20 text-gray-200' }}
+                  </div>
+                {% endif %}
 
-                <!-- Overlay -->
                 <div
-                  class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300"
+                  class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 ></div>
+              </div>
 
-                <!-- Content -->
-                <div class="p-4">
-                  <h2 class="text-lg font-medium text-gray-800 group-hover:text-black transition">
-                    {{ collection.title }}
-                  </h2>
-                  <p class="text-sm text-gray-500 mt-1">{{ collection.all_products_count }} products</p>
-                </div>
+              <div class="text-center lg:text-left">
+                <h2 class="text-2xl font-serif italic mb-2 transition-colors group-hover:text-rose-600">
+                  {{ collection.title }}
+                </h2>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
+                  {{ collection.all_products_count }} Products
+                </p>
               </div>
             </a>
           </div>
         {% endif %}
       {% endfor %}
     </div>
+
+    {% assign active_collections = 0 %}
+    {% for collection in collections %}
+      {% if collection.all_products_count > 0 -%}
+        {%- assign active_collections = active_collections | plus: 1 -%}
+      {%- endif %}
+    {% endfor %}
+
+    {% if active_collections > 4 %}
+      <div class="mt-20 flex flex-col items-center gap-4">
+        <button id="see-more-btn" class="btn-premium bg-black text-white shadow-xl">
+          <span class="relative z-10">Explore More</span>
+          <div class="btn-overlay bg-gradient-to-r from-rose-400 to-rose-600"></div>
+        </button>
+        <p id="item-count" class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
+          Showing 4 of {{ active_collections }} Categories
+        </p>
+      </div>
+    {% endif %}
   </div>
-</div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('see-more-btn');
+    const countText = document.getElementById('item-count');
+    const items = document.querySelectorAll('.collection-item');
+    const totalItems = items.length;
+    let currentlyShown = 4;
+
+    if (btn) {
+      btn.addEventListener('click', function () {
+        const hiddenItems = document.querySelectorAll('.hidden-item');
+
+        for (let i = 0; i < 4; i++) {
+          if (hiddenItems[i]) {
+            hiddenItems[i].classList.remove('hidden-item');
+            hiddenItems[i].classList.add('animate-fadeUp');
+            currentlyShown++;
+          }
+        }
+
+        countText.innerText = `Showing ${currentlyShown} of ${totalItems} Categories`;
+
+        if (currentlyShown >= totalItems) {
+          btn.parentElement.style.display = 'none';
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .hidden-item {
+    display: none;
+  }
+
+  .btn-premium {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2.5rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .btn-premium:hover {
+    transform: scale(1.05);
+  }
+
+  .btn-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-premium:hover .btn-overlay {
+    opacity: 1;
+  }
+
+  .animate-fadeUp {
+    animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
 
 {% schema %}
 {
@@ -52,9 +170,21 @@
   "settings": [
     {
       "type": "text",
+      "id": "label",
+      "label": "Small Top Label",
+      "default": "The Archive"
+    },
+    {
+      "type": "text",
       "id": "page_title",
       "label": "Page Title",
       "default": "All Collections"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Curated categories of premium digital resources and development assets."
     }
   ]
 }

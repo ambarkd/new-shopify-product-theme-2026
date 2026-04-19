@@ -43,11 +43,11 @@
         <div class="flex gap-10 items-center justify-start md:justify-between overflow-x-auto no-scrollbar py-2">
           {% for block in section.blocks %}
             {% if block.settings.logo != blank %}
-              <div class="flex-shrink-0 opacity-70 hover:opacity-100 transition">
+              <div class="flex-shrink-0 opacity-80 hover:opacity-100 transition bg-white/90 p-3 rounded-md">
                 <img
                   src="{{ block.settings.logo | image_url: width: 160 }}"
                   alt="logo"
-                  class="h-10 md:h-12 object-contain"
+                  class="h-8 md:h-10 object-contain"
                 >
               </div>
             {% endif %}

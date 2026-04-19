@@ -1,7 +1,7 @@
-<section class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 text-white pt-[75px] relative overflow-hidden">
-  <!-- Soft Glow Background -->
+<section class="bg-gradient-to-b from-rose-50 via-rose-100 to-rose-200 text-black pt-[75px] relative overflow-hidden">
+  <!-- Soft Glow -->
   <div
-    class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_40%)] pointer-events-none"
+    class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,0,0,0.05),transparent_40%)] pointer-events-none"
   ></div>
 
   <div class="mx-auto max-w-6xl px-4 py-16 relative z-10">
@@ -13,14 +13,14 @@
           {{ section.settings.heading }}
         </h1>
 
-        <p class="text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
+        <p class="text-gray-700 mb-8 max-w-lg mx-auto md:mx-0">
           {{ section.settings.subtext }}
         </p>
 
         {% if section.settings.button_text != blank %}
           <a
             href="{{ section.settings.button_link }}"
-            class="inline-block bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition shadow-md"
+            class="inline-block bg-black text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition shadow-md"
           >
             {{ section.settings.button_text }}
           </a>
@@ -33,7 +33,7 @@
           <img
             src="{{ section.settings.image | image_url: width: 500 }}"
             alt="banner"
-            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border border-gray-600 shadow-2xl"
+            class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border border-gray-300 shadow-xl"
           >
         {% endif %}
       </div>
@@ -42,7 +42,7 @@
     <!-- Tools Section -->
     {% if section.blocks.size > 0 %}
       <div class="mt-20 text-center">
-        <!-- Logo Row -->
+        <!-- Logos -->
         <div class="flex gap-12 md:gap-16 items-center justify-center overflow-x-auto no-scrollbar py-2">
           {% for block in section.blocks %}
             {% if block.settings.logo != blank %}
@@ -57,13 +57,13 @@
           {% endfor %}
         </div>
 
-        <!-- Text Below Logos -->
-        <p class="text-gray-400 mt-6 text-sm tracking-wide">Technologies I work with</p>
+        <!-- Text -->
+        <p class="text-gray-600 mt-6 text-sm tracking-wide">Technologies I work with</p>
       </div>
     {% endif %}
   </div>
 
-  <!-- Animations + Scrollbar -->
+  <!-- Styles -->
   <style>
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -73,7 +73,6 @@
       scrollbar-width: none;
     }
 
-    /* Fade Up Animation */
     .animate-fadeUp {
       animation: fadeUp 0.8s ease forwards;
     }
@@ -89,7 +88,6 @@
       }
     }
 
-    /* Floating Image */
     .animate-float img {
       animation: float 4s ease-in-out infinite;
     }

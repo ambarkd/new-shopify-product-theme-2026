@@ -45,8 +45,39 @@
       </div>
 
       {% if paginate.pages > 1 %}
-        <div class="mt-20 pt-10 border-t border-black/5">
-          {% render 'pagination', pagination: paginate %}
+        <div class="mt-20 pt-10 border-t border-black/5 flex justify-center">
+          <div class="flex items-center gap-4">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" class="btn-pagination-premium">
+                <span class="relative z-10">Previous</span>
+                <div class="btn-pagination-overlay bg-black"></div>
+              </a>
+            {% endif %}
+
+            <div class="flex items-center gap-2">
+              {% for part in paginate.parts %}
+                {% if part.is_link %}
+                  <a
+                    href="{{ part.url }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-black/5 hover:border-black transition-all text-sm"
+                  >
+                    {{- part.title -}}
+                  </a>
+                {% else %}
+                  <span class="w-10 h-10 flex items-center justify-center rounded-full {% if part.title == paginate.current_page %}bg-black text-white{% else %}text-gray-400{% endif %} text-sm">
+                    {{- part.title -}}
+                  </span>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" class="btn-pagination-premium">
+                <span class="relative z-10">Next</span>
+                <div class="btn-pagination-overlay bg-black"></div>
+              </a>
+            {% endif %}
+          </div>
         </div>
       {% endif %}
     {% endpaginate %}
@@ -54,6 +85,37 @@
 </section>
 
 <style>
+  /* Premium Pagination Button (Identical to Blog "Read Article") */
+  .btn-pagination-premium {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 9999px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .btn-pagination-premium:hover {
+    color: white;
+    border-color: black;
+  }
+
+  .btn-pagination-overlay {
+    position: absolute;
+    inset: 0;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .btn-pagination-premium:hover .btn-pagination-overlay {
+    transform: translateY(0);
+  }
+
   .animate-fadeUp {
     animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }

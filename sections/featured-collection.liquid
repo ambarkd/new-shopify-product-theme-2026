@@ -20,7 +20,7 @@
       {% endif %}
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {% for product in section.settings.featured_collection.products
         limit: section.settings.number_of_product_to_display
       %}
@@ -59,7 +59,7 @@
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "A curated collection of my most recent works and digital products."
+      "default": "A collection of custom projects created for this development store, showcasing design ideas, features, and implementation approaches."
     },
     {
       "type": "collection",

@@ -12,6 +12,36 @@
     "home_page_banner_74mrHh": {
       "type": "home-page-banner",
       "blocks": {
+        "logo_dnYGwF": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/squarespace.png"
+          }
+        },
+        "logo_hCfgpU": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/social.png"
+          }
+        },
+        "logo_QHyY6a": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/bigcommerce_logo_icon_247476.png"
+          }
+        },
+        "logo_wX674z": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/atom.png"
+          }
+        },
+        "logo_W8T64z": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/wordpress.png"
+          }
+        },
         "logo_HYKH9J": {
           "type": "logo",
           "settings": {
@@ -20,6 +50,11 @@
         }
       },
       "block_order": [
+        "logo_dnYGwF",
+        "logo_hCfgpU",
+        "logo_QHyY6a",
+        "logo_wX674z",
+        "logo_W8T64z",
         "logo_HYKH9J"
       ],
       "name": "Home Page Banner",

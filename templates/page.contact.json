@@ -11,16 +11,28 @@
   "sections": {
     "contact-banner": {
       "type": "contact-banner",
-      "settings": {}
+      "settings": {
+        "sub_label": "Available for Projects",
+        "headline": "Let's build something exceptional.",
+        "intro_text": "<p>Bridging the gap between aesthetic design and technical performance.</p>"
+      }
     },
     "template": {
       "type": "template-page",
+      "disabled": true,
       "settings": {}
     },
     "Contact-form": {
       "type": "contact-form",
-      "settings": {}
+      "settings": {
+        "form_name": "Let's start a conversation.",
+        "description": "I am currently exploring new job opportunities in web development and would love to connect with hiring teams. If you have an open role or are looking for someone to contribute to your projects, feel free to reach out. I am eager to bring value and grow within a strong, collaborative environment."
+      }
     }
   },
-  "order": ["contact-banner", "template", "Contact-form"]
+  "order": [
+    "contact-banner",
+    "template",
+    "Contact-form"
+  ]
 }

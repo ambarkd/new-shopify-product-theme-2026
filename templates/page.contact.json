@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "contact-banner": {
+      "type": "contact-banner",
+      "settings": {}
+    },
     "template": {
       "type": "template-page",
       "settings": {}
@@ -18,8 +22,5 @@
       "settings": {}
     }
   },
-  "order": [
-    "template",
-    "Contact-form"
-  ]
+  "order": ["contact-banner", "template", "Contact-form"]
 }

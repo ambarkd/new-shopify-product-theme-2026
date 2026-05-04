@@ -1,0 +1,103 @@
+<!-- contact-banner.liquid -->
+<section class="relative bg-[#FAF9F6] py-24 px-6 overflow-hidden animate-fadeUp">
+  <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+    <!-- Profile Image: Squircle Frame -->
+    <div class="relative group mb-12">
+      <div class="w-48 h-48 md:w-56 md:h-56 overflow-hidden rounded-[3rem] border-4 border-white shadow-xl transition-transform duration-500 hover:scale-105">
+        {% if section.settings.profile_image != blank %}
+          <img
+            src="{{ section.settings.profile_image | image_url: width: 800 }}"
+            alt="{{ section.settings.profile_image.alt | escape }}"
+            class="w-full h-full object-cover"
+            loading="eager"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+        {% endif %}
+      </div>
+      <!-- Subtle Background "Blob" -->
+      <div
+        class="absolute -inset-4 bg-rose-400/20 blur-[60px] rounded-full -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+      ></div>
+    </div>
+
+    <!-- Profile Intro -->
+    <div class="space-y-6 max-w-2xl">
+      <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-black/50">
+        {{ section.settings.sub_label }}
+      </p>
+
+      <h1 class="font-serif italic text-4xl md:text-6xl text-black leading-tight">
+        {{ section.settings.headline }}
+      </h1>
+
+      <div class="text-black/70 text-lg leading-relaxed mb-10">
+        {{ section.settings.intro_text }}
+      </div>
+
+      <!-- Contact Box: Side-by-Side Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+        <!-- LinkedIn: Brand Color on Hover -->
+        <a
+          href="https://www.linkedin.com/in/ambar-dhara-867a68239/"
+          target="_blank"
+          class="group relative w-full sm:w-auto px-10 py-4 bg-black rounded-[1.5rem] overflow-hidden transition-all duration-300 active:scale-95"
+        >
+          <span class="relative z-10 font-serif italic text-white group-hover:text-white flex items-center justify-center gap-2">
+            LinkedIn
+          </span>
+          <div
+            class="absolute inset-0 bg-[#0077b5] translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+          ></div>
+        </a>
+
+        <!-- Email: Rose Gradient Hover -->
+        <a
+          href="mailto:ambar.dh56@gmail.com"
+          class="group relative w-full sm:w-auto px-10 py-4 bg-black rounded-[1.5rem] overflow-hidden transition-all duration-300 active:scale-95"
+        >
+          <span class="relative z-10 font-serif italic text-white">Email Me</span>
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-rose-400 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "profile_image",
+      "label": "Profile Image"
+    },
+    {
+      "type": "text",
+      "id": "sub_label",
+      "label": "Sub-label",
+      "default": "Available for Projects"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Let's build something exceptional."
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Intro Bio",
+      "default": "<p>Bridging the gap between aesthetic design and technical performance.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Banner"
+    }
+  ]
+}
+{% endschema %}

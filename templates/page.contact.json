@@ -12,6 +12,7 @@
     "contact-banner": {
       "type": "contact-banner",
       "settings": {
+        "profile_image": "shopify://shop_images/Ambar_kumar_dhara.png",
         "sub_label": "Available for Projects",
         "headline": "Let's build something exceptional.",
         "intro_text": "<p>Bridging the gap between aesthetic design and technical performance.</p>"

@@ -1,12 +1,12 @@
 <!-- contact-banner.liquid -->
-<section class="relative bg-[#FAF9F6] py-24 px-6 overflow-hidden animate-fadeUp">
+<section class="relative bg-[#FAF9F6] pt-16 pb-12 md:pt-20 md:pb-16 px-6 overflow-hidden animate-fadeUp">
   <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
-    <!-- Profile Image: Squircle Frame -->
-    <div class="relative group mb-12">
-      <div class="w-48 h-48 md:w-56 md:h-56 overflow-hidden rounded-[3rem] border-4 border-white shadow-xl transition-transform duration-500 hover:scale-105">
+    <!-- Profile Image: Circular Frame with Vibrant Gradient -->
+    <div class="relative group mb-8">
+      <div class="w-40 h-40 md:w-48 md:h-48 overflow-hidden rounded-full border-4 border-white shadow-2xl transition-transform duration-500 hover:scale-105 z-10 relative">
         {% if section.settings.profile_image != blank %}
           <img
-            src="{{ section.settings.profile_image | image_url: width: 800 }}"
+            src="{{ section.settings.profile_image | image_url: width: 600 }}"
             alt="{{ section.settings.profile_image.alt | escape }}"
             class="w-full h-full object-cover"
             loading="eager"
@@ -15,50 +15,51 @@
           {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
         {% endif %}
       </div>
-      <!-- Subtle Background "Blob" -->
+      <!-- Vibrant Background Glow -->
       <div
-        class="absolute -inset-4 bg-rose-400/20 blur-[60px] rounded-full -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        class="absolute -inset-6 bg-gradient-to-tr from-rose-500 via-rose-400 to-orange-300 blur-[50px] rounded-full -z-0 opacity-40 group-hover:opacity-70 transition-opacity duration-500"
       ></div>
     </div>
 
     <!-- Profile Intro -->
-    <div class="space-y-6 max-w-2xl">
-      <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-black/50">
+    <div class="space-y-4 max-w-2xl">
+      <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-rose-600">
         {{ section.settings.sub_label }}
       </p>
 
-      <h1 class="font-serif italic text-4xl md:text-6xl text-black leading-tight">
+      <h1 class="font-serif italic text-3xl md:text-5xl text-black leading-tight">
         {{ section.settings.headline }}
       </h1>
 
-      <div class="text-black/70 text-lg leading-relaxed mb-10">
+      <div class="text-black/70 text-base md:text-lg leading-relaxed px-4">
         {{ section.settings.intro_text }}
       </div>
 
-      <!-- Contact Box: Side-by-Side Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-        <!-- LinkedIn: Brand Color on Hover -->
+      <!-- Contact Box: Side-by-Side Responsive Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+        <!-- LinkedIn: Brand Color Default -->
         <a
           href="https://www.linkedin.com/in/ambar-dhara-867a68239/"
           target="_blank"
-          class="group relative w-full sm:w-auto px-10 py-4 bg-black rounded-[1.5rem] overflow-hidden transition-all duration-300 active:scale-95"
+          class="group relative w-full sm:w-auto px-8 py-3.5 bg-[#0077b5] rounded-[2rem] overflow-hidden transition-all duration-300 active:scale-95 flex items-center justify-center gap-3 shadow-lg shadow-blue-900/10"
         >
-          <span class="relative z-10 font-serif italic text-white group-hover:text-white flex items-center justify-center gap-2">
-            LinkedIn
-          </span>
-          <div
-            class="absolute inset-0 bg-[#0077b5] translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-          ></div>
+          <svg class="w-5 h-5 fill-white" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          <span class="font-serif italic text-white text-sm">LinkedIn</span>
         </a>
 
-        <!-- Email: Rose Gradient Hover -->
+        <!-- Email: Black to Rose Gradient -->
         <a
           href="mailto:ambar.dh56@gmail.com"
-          class="group relative w-full sm:w-auto px-10 py-4 bg-black rounded-[1.5rem] overflow-hidden transition-all duration-300 active:scale-95"
+          class="group relative w-full sm:w-auto px-8 py-3.5 bg-black rounded-[2rem] overflow-hidden transition-all duration-300 active:scale-95 flex items-center justify-center gap-3"
         >
-          <span class="relative z-10 font-serif italic text-white">Email Me</span>
+          <svg class="w-5 h-5 stroke-white fill-none" stroke-width="1.5" viewBox="0 0 24 24">
+            <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="relative z-10 font-serif italic text-white text-sm">Email Me</span>
           <div
-            class="absolute inset-0 bg-gradient-to-r from-rose-400 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            class="absolute inset-0 bg-gradient-to-r from-rose-500 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           ></div>
         </a>
       </div>
@@ -91,7 +92,7 @@
       "type": "richtext",
       "id": "intro_text",
       "label": "Intro Bio",
-      "default": "<p>Bridging the gap between aesthetic design and technical performance.</p>"
+      "default": "<p>As a seasoned frontend developer specializing in Shopify and modern web ecosystems, I bridge the gap between high-end editorial aesthetics and robust technical performance. My approach focuses on creating scalable, high-conversion digital experiences that utilize clean code and intuitive UX design to elevate your brand's unique online presence and professional identity.</p>"
     }
   ],
   "presets": [

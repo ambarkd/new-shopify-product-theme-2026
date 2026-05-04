@@ -11,12 +11,24 @@
   "sections": {
     "about-hero": {
       "type": "about-me-section",
-      "settings": {}
+      "settings": {
+        "about_image": "shopify://shop_images/Ambar_kumar_dhara.png",
+        "sub_label": "The Journey",
+        "main_headline": "Experience meets aesthetic precision.",
+        "bio_intro": "<p>I am a dedicated Frontend Web Developer with over 3 years of professional experience, currently driving innovation as a Point of Contact (POC) lead. My focus is on turning complex requirements into seamless digital realities.</p>",
+        "bio_technical": "<p>My expertise is built on a foundation of vanilla JavaScript, HTML5, and CSS3, extending into modern ecosystems like React and Shopify Liquid. Having worked across multiple CMS platforms, I specialize in custom-coded solutions that bypass generic templates in favor of high-performance, tailored experiences.</p>"
+      }
     },
     "Contact-form": {
       "type": "contact-form",
-      "settings": {}
+      "settings": {
+        "form_name": "Let's start a conversation.",
+        "description": "I am currently exploring new job opportunities in web development and would love to connect with hiring teams. If you have an open role or are looking for someone to contribute to your projects, feel free to reach out. I am eager to bring value and grow within a strong, collaborative environment."
+      }
     }
   },
-  "order": ["about-hero", "Contact-form"]
+  "order": [
+    "about-hero",
+    "Contact-form"
+  ]
 }

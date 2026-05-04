@@ -360,6 +360,9 @@
   .-z-10 {
     z-index: calc(10 * -1);
   }
+  .z-0 {
+    z-index: 0;
+  }
   .z-10 {
     z-index: 10;
   }
@@ -1338,6 +1341,9 @@
   }
   .pt-\[130px\] {
     padding-top: 130px;
+  }
+  .pt-\[calc\(50px\+4rem\)\] {
+    padding-top: calc(50px + 4rem);
   }
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);

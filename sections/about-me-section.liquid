@@ -1,0 +1,118 @@
+<!-- about-me-section.liquid -->
+<section class="relative bg-[#FAF9F6] py-20 md:py-32 px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+      <!-- Left Column: Content (7 Cols) -->
+      <div class="lg:col-span-7 space-y-12 animate-fadeUp">
+        <div>
+          <p class="text-[10px] uppercase tracking-[0.3em] font-bold text-rose-600 mb-4">
+            {{ section.settings.sub_label }}
+          </p>
+          <h2 class="font-serif italic text-4xl md:text-6xl text-black leading-tight">
+            {{ section.settings.main_headline }}
+          </h2>
+        </div>
+
+        <!-- Bio Paragraphs -->
+        <div class="space-y-8">
+          <div class="text-black/80 text-lg md:text-xl leading-relaxed font-medium">
+            {{ section.settings.bio_intro }}
+          </div>
+
+          <div class="h-[1px] w-20 bg-rose-400"></div>
+
+          <div class="text-black/60 text-base md:text-lg leading-relaxed prose prose-rose">
+            {{ section.settings.bio_technical }}
+          </div>
+        </div>
+
+        <!-- Phone Action -->
+        <div class="pt-6">
+          <a
+            href="tel:+919874061784"
+            class="group relative inline-flex items-center justify-center px-10 py-4 bg-black rounded-[2rem] overflow-hidden transition-all duration-300 active:scale-95 gap-3"
+          >
+            <svg class="w-5 h-5 stroke-white fill-none relative z-10" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="relative z-10 font-serif italic text-white text-sm">+91 9874061784</span>
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-rose-500 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            ></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Anchor (5 Cols) -->
+      <div class="lg:col-span-5 sticky top-32 animate-fadeUp" style="animation-delay: 200ms;">
+        <div class="relative">
+          <!-- The Main Squircle Image -->
+          <div class="aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white relative z-10">
+            {% if section.settings.about_image != blank %}
+              <img
+                src="{{ section.settings.about_image | image_url: width: 1000 }}"
+                alt="Professional Profile"
+                class="w-full h-full object-cover"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+            {% endif %}
+          </div>
+
+          <!-- Decorative Floating Element -->
+          <div
+            class="absolute -bottom-6 -left-6 w-32 h-32 bg-rose-500 rounded-[2.5rem] -z-0 blur-2xl opacity-20 animate-pulse"
+          ></div>
+
+          <!-- Experience Badge -->
+          <div class="absolute -top-6 -right-6 bg-white p-6 rounded-[2rem] shadow-xl z-20 border border-black/5 backdrop-blur-md">
+            <p class="text-3xl font-serif italic text-black">3+</p>
+            <p class="text-[8px] uppercase tracking-widest font-bold text-black/40">Years Exp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Me Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "about_image",
+      "label": "About Visual (Vertical)"
+    },
+    {
+      "type": "text",
+      "id": "sub_label",
+      "label": "Small Label",
+      "default": "The Journey"
+    },
+    {
+      "type": "text",
+      "id": "main_headline",
+      "label": "Headline",
+      "default": "Experience meets aesthetic precision."
+    },
+    {
+      "type": "richtext",
+      "id": "bio_intro",
+      "label": "Professional Intro",
+      "default": "<p>I am a dedicated Frontend Web Developer with over 3 years of professional experience, currently driving innovation as a Point of Contact (POC) lead. My focus is on turning complex requirements into seamless digital realities.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "bio_technical",
+      "label": "Technical Narrative",
+      "default": "<p>My expertise is built on a foundation of vanilla JavaScript, HTML5, and CSS3, extending into modern ecosystems like React and Shopify Liquid. Having worked across multiple CMS platforms, I specialize in custom-coded solutions that bypass generic templates in favor of high-performance, tailored experiences.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Me Section"
+    }
+  ]
+}
+{% endschema %}
